@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>index</title>
+</head>
+
+<body>
+    <header>
+        <span id="welcome_message"></span>
+        <button id="logout-btn" onclick="handleLogout()">خروج</button>
+    </header>
+
+    <div>
+        <fieldset>
+            <legend>جستجوی فعالیت</legend>
+            <label for="filter_status">وضعیت</label>
+            <select name="filter_status" id="filter-status" onclick="loadTasks()">
+                <option value="ANY">همه</option>
+                <option value="TODO">در دست انجام</option>
+                <option value="COMPLETED">تکمیل شده</option>
+            </select>
+            <label for="filter_priority">اولویت</label>
+            <select name="filter_priority" id="filter-priority" onclick="loadTasks()">
+                <option value="ANY">همه</option>
+                <option value="1">پایین</option>
+                <option value="2">متوسط</option>
+                <option value="3">بالا</option>
+            </select>
+            <br>
+            <input type="text" id="search-input" placeholder="جستجو" onclick="loadTasks()">
+        </fieldset>
+    </div>
+
+    <button id="new-task-btn" onclick="openTaskForm()">ساخت تسک جدید</button>
+
+    <div id="task-form-container" style="display:none;">
+        <fieldset>
+            <legend>ساخت فعالیت</legend>
+            <input type="hidden" id="task-id">
+            <label for="task_title">عنوان</label>
+            <input type="text" name="task_title" id="task-title" placeholder="عنوان تسک">
+            <br>
+            <label for="task_description">توضیحات</label>
+            <textarea name="task_description" id="task-description" placeholder="توضیحات تسک"></textarea>
+            <br>
+            <div id="status-field-wrapper" style="display:none;">
+                <label for="task_status">وضعیت</label>
+                <select name="task_status" id="task-status">
+                    <option value="TODO">در دست انجام</option>
+                    <option value="COMPLETED">تکمیل شده</option>
+                </select>
+                <br>
+            </div>
+            <label for="task_priority">اولویت</label>
+            <select name="task_priority" id="task-priority">
+                <option value="1">پایین</option>
+                <option value="2">متوسط</option>
+                <option value="3">بالا</option>
+            </select>
+            <br>
+            <label for="task_due_date">تاریخ سررسید</label>
+            <input type="datetime-local" name="task_due_date" id="task-due-date">
+            <br>
+            <button id="save-task-btn" onclick="saveTask()">ذخیره</button>
+            <button id="cancel-task-btn" onclick="hideTaskForm()">لغو</button>
+            <br>
+            <p id="task-form-message" style="color: blue;"></p>
+            <p id="task-form-error" style="color: red;"></p>
+        </fieldset>
+    </div>
+
+    <div id="task-list-container">
+        <fieldset>
+            <legend>فعالیت ها</legend>
+        </fieldset>
+    </div>
+
+    <div id="pagination-container">
+        <button id="prev-page-btn">صفحه قبل</button>
+        <span id="current-page"></span>
+        <button id="next-page-btn">صفحه بعد</button>
+    </div>
+
+    <div id="activity_log-container"></div>
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/tasks.js"></script>
+</body>
+</html>

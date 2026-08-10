@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>login</title>
+</head>
+<body>
+    <div id="login_form">
+        <fieldset>
+            <legend>ورود</legend>
+            <input type="text" name="username" id="username" placeholder="Username" autofocus>
+            <br>
+            <input type="password" name="password" id="password" placeholder="Password">
+            <br>
+            <button id="login-btn" style="width: 80px;height: 30px;" onclick="handleLogin()">ورود</button>
+            <br>
+            <p>برای ثبت نام <a href="register.html">اینجا</a> کلیک کنید.</p>
+            <br>
+            <p id="login-error" style="color: red;"></p>
+        </fieldset>
+    </div>
+
+    <script src="js/api.js" ></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>

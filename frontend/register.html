@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>register</title>
+</head>
+<body>
+    <div id="register_form">
+        <fieldset>
+            <legend>ثبت نام</legend>
+            <input type="text" name="username" id="username" placeholder="Username" autofocus>
+            <br>
+            <input type="email" name="email" id="email" placeholder="Email" required>
+            <br>
+            <input type="password" name="password" id="password" placeholder="Password">
+            <br>
+            <button id="register-btn" style="width: 80px;height: 30px;" onclick="handleRegister()">ثبت نام</button>
+            <br>
+            <p>برای ورود <a href="login.html">اینجا</a> کلیک کنید.</p>
+            <br>
+            <p id="register-error" style="color: red;"></p>
+        </fieldset>
+    </div>
+
+    <script src="js/api.js" ></script>
+    <script src="js/auth.js"></script>
+</body>
+</html>
