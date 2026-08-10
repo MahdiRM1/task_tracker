@@ -1,3 +1,5 @@
+let currentPage = 1;
+
 async function loadTasks() {
     const status = document.getElementById('filter-status').value;
     const priority = document.getElementById('filter-priority').value;
@@ -7,38 +9,24 @@ async function loadTasks() {
     if (status != "ANY") params.append('status', status);
     if (priority != "ANY") params.append('priority', priority);
     if (search) params.append('search', search);
+    params.append('page', currentPage);
     
     const queryString = params.toString();
-    const endpoint = '/tasks/' + (queryString ? `?${queryString}` : '');
-
-    const result = await apiGet(endpoint);
+    const result = await apiGet(`/tasks/?${queryString}`);
     await renderTaskList(result.results);
+
+    document.getElementById('current-page').textContent = currentPage;
+    document.getElementById('prev-page-btn').disabled = result.previous === null;
+    document.getElementById('next-page-btn').disabled = result.next === null;
+}
+
+async function edit_filter() {
+    currentPage = 1;
+    await loadTasks();
 }
 
 async function openTaskForm(task_id = null) {
     const formContainer = document.getElementById('task-form-container');
-    const statusWraper = document.getElementById('status-field-wrapper');
-
-    if (task_id){
-        const task = await apiGet(`/tasks/${task_id}/`);
-        
-        document.getElementById("task-id").value = task.id;
-        document.getElementById("task-title").value = task.title;
-        document.getElementById("task-description").value = task.description;
-        document.getElementById("task-priority").value = task.priority;
-        document.getElementById("task-status").value = task.status;
-        document.getElementById('task-due-date').value = task.due_date.slice(0, 16);
-
-        statusWraper.style.display = 'block';
-    }else{
-        document.getElementById("task-id").value = '';
-        document.getElementById("task-title").value = '';
-        document.getElementById("task-description").value = '';
-        document.getElementById("task-priority").value = '2';
-        document.getElementById("task-due-date").value = '';
-
-        statusWraper.style.display = 'block';
-    }
     formContainer.style.display = 'block';
 }
 
@@ -55,7 +43,7 @@ async function saveTask() {
         return;
     }
 
-    if (document.getElementById('task-due-date') === null) {
+    if (document.getElementById('task-due-date').value.trim() === '') {
         document.getElementById('task-form-error').textContent = 'تاریخ سررسید نمی‌تواند خالی باشد.';
         return;
     }
@@ -63,6 +51,7 @@ async function saveTask() {
     const data = {
         title: document.getElementById('task-title').value,
         description: document.getElementById('task-description').value,
+        status: document.getElementById('task-status').value,
         priority: Number(document.getElementById('task-priority').value),
         due_date: document.getElementById('task-due-date').value
     };
@@ -75,17 +64,16 @@ async function saveTask() {
     loadTasks();
 }
 
-async function deleteTask(taskId) {
-    await apiDelete(`/tasks/${taskId}/`)
-    loadTasks();
-}
-
-async function loadActivityLogs() {
-    const endpoint = '/activity_log/';
-
-    const result = await apiGet(endpoint);
-    await renderActivityLogList(result.results);
-}
-
 loadTasks();
-loadActivityLogs();
+
+document.getElementById('next-page-btn').addEventListener('click', () => {
+    currentPage++;
+    loadTasks();
+});
+
+document.getElementById('prev-page-btn').addEventListener('click', () => {
+    if (currentPage > 1) {
+        currentPage--;
+        loadTasks();
+    }
+});

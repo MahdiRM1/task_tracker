@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>جزئیات تسک</title>
+    <link rel="stylesheet" href="css/task-detail.css">
+</head>
+
+<body>
+
+    <main id="task-detail-container">
+
+        <div class="task-header">
+            <button id="back-btn" onclick="window.location.href='index.html'">
+                ← بازگشت به تسک‌ها
+            </button>
+        </div>
+
+        <fieldset id="task-detail">
+
+            <legend>جزئیات تسک</legend>
+
+            <div id="task-view">
+
+                <h1 id="task-title"></h1>
+
+                <div class="task-info">
+
+                    <div class="info-item">
+                        <span class="info-label">وضعیت</span>
+                        <span id="task-status"></span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">اولویت</span>
+                        <span id="task-priority"></span>
+                    </div>
+
+                    <div class="info-item">
+                        <span class="info-label">مهلت تحویل</span>
+                        <span id="task-due-date"></span>
+                    </div>
+
+                </div>
+
+                <div class="description-section">
+                    <h3>توضیحات</h3>
+                    <p id="task-description"></p>
+                </div>
+
+                <div class="task-actions">
+
+                    <button id="edit-task-btn" onclick="showEditForm()">
+                        ویرایش
+                    </button>
+
+                    <button id="delete-task-btn" onclick="deleteTask()">
+                        حذف
+                    </button>
+
+                </div>
+
+            </div>
+
+            <p id="task-error"></p>
+
+        </fieldset>
+
+    </main>
+
+    <div id="edit-task-form" style="display: none;">
+
+        <label for="edit-title">عنوان</label>
+        <input type="text" id="edit-title">
+
+        <label for="edit-description">توضیحات</label>
+        <textarea id="edit-description"></textarea>
+
+        <label for="edit-status">وضعیت</label>
+        <select id="edit-status">
+            <option value="TODO">در دست انجام</option>
+            <option value="COMPLETED">تکمیل شده</option>
+        </select>
+
+        <label for="edit-priority">اولویت</label>
+        <select id="edit-priority">
+            <option value="1">پایین</option>
+            <option value="2">متوسط</option>
+            <option value="3">بالا</option>
+        </select>
+
+        <label for="edit-due-date">مهلت تحویل</label>
+        <input type="datetime-local" id="edit-due-date">
+
+        <button id="save-edit-btn" onclick="saveEditTask()">
+            ذخیره تغییرات
+        </button>
+
+        <button id="cancel-edit-btn" onclick="cancelEdit()">
+            لغو
+        </button>
+
+        <p id="edit-error"></p>
+
+    </div>
+
+
+    <script src="js/api.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/task-detail.js"></script>
+
+</body>
+
+</html>

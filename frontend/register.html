@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>register</title>
+    <title>ثبت نام</title>
+    <link rel="stylesheet" href="css/auth.css">
 </head>
 <body>
     <div id="register_form">
         <fieldset>
             <legend>ثبت نام</legend>
-            <input type="text" name="username" id="username" placeholder="Username" autofocus>
+            <input type="text" name="username" id="username" placeholder="نام کاربری" autofocus>
             <br>
-            <input type="email" name="email" id="email" placeholder="Email" required>
+            <input type="email" name="email" id="email" placeholder="ایمیل" required>
             <br>
-            <input type="password" name="password" id="password" placeholder="Password">
+            <input type="password" name="password" id="password" placeholder="رمز عبور">
             <br>
             <button id="register-btn" style="width: 80px;height: 30px;" onclick="handleRegister()">ثبت نام</button>
             <br>

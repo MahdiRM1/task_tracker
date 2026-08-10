@@ -13,16 +13,20 @@ function statusLabel(status) {
 
 function renderTaskCard(task) {
     return `
-    <div class="task_cart">
-        <h3>عنوان:${task.title}</h3>
-        <p>توضیحات:${task.description}</p>
-        <p>وضعیت:${statusLabel(task.status)}</p>
-        <p>اولویت:${priorityLabel(task.priority)}</p>
-        <p>مهلت تحویل:${new Date(task.due_date).toLocaleDateString('fa-IR')}</p>
-        <button onclick="openTaskForm(${task.id})">ویرایش</button>
-        <button onclick="deleteTask(${task.id})">حذف</button>
-    </div>
-    `
+        <div class="task-item" onclick="openTask(${task.id})">
+            <span class="task-title">${task.title}</span>
+            <span class="task-status">
+                ${statusLabel(task.status)}
+            </span>
+            <span class="task-priority">
+                ${priorityLabel(task.priority)}
+            </span>
+        </div>
+    `;
+}
+
+function openTask(taskId) {
+    window.location.href = `task-detail.html?id=${taskId}`;
 }
 
 function renderTaskList(tasks) {
@@ -36,24 +40,33 @@ function renderTaskList(tasks) {
     `;
 }
 
-function renderActivityLog(activity_log) {
+function renderActivityLog(log) {
     return `
-    <div class="activity_log_cart">
-        <h3>توسط:${activity_log.username}</h3>
-        <p>نام فعالیت:${activity_log.task_title}</p>
-        <p>عمل:${activity_log.action}</p>
-        <p>مقدار قبلی:${statusLabel(activity_log.old_value)}</p>
-        <p>مقدار جدید:${priorityLabel(activity_log.new_value)}</p>
+    <div class="activity_log_card">
+        <h3>نام فعالیت:${log.task_title}</h3>
+        <p>عمل:${log.action}</p>
+        <p>مقدار قبلی:${log.old_value}</p>
+        <p>مقدار جدید:${log.new_value}</p>
     </div>
     `
 }
 
-function renderActivityLogList(activity_logs) {
+function renderActivityLogList(logs) {
     const container = document.getElementById('activity_log-container');
     container.innerHTML = `
         <fieldset>
             <legend>لاگ ها</legend>
-            ${activity_logs.map(al => renderActivityLog(al)).join('')}
+            ${logs.map(log => renderActivityLog(log)).join('')}
         </fieldset>
     `;
+}
+
+function showSearch() {
+    const search = document.getElementById('search-container');
+    search.style.display = 'block';
+}
+
+function hideSearch() {
+    const search = document.getElementById('search-container');
+    search.style.display = 'none';
 }

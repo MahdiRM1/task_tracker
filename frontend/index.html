@@ -1,9 +1,10 @@
 <!DOCTYPE html>
-<html lang="en" dir="rtl">
+<html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>index</title>
+    <link rel="stylesheet" href="css/index.css">
 </head>
 
 <body>
@@ -11,39 +12,45 @@
         <span id="welcome_message"></span>
         <button id="logout-btn" onclick="handleLogout()">خروج</button>
     </header>
+    
+    <div class="button-group">
+        <button id="search-btn" onclick="showSearch()">جستجو</button>
+        <button id="new-task-btn" onclick="openTaskForm()">ساخت فعالیت جدید</button>
+        <button id="activity-logs-btn" onclick="window.location.href='activity_logs.html'">مشاهده فعالیت‌ها</button>
+    </div>
 
-    <div>
+    <div id="search-container" style="display: none;">
         <fieldset>
             <legend>جستجوی فعالیت</legend>
             <label for="filter_status">وضعیت</label>
-            <select name="filter_status" id="filter-status" onclick="loadTasks()">
+            <select name="filter_status" id="filter-status" onchange="edit_filter()">
                 <option value="ANY">همه</option>
                 <option value="TODO">در دست انجام</option>
                 <option value="COMPLETED">تکمیل شده</option>
             </select>
             <label for="filter_priority">اولویت</label>
-            <select name="filter_priority" id="filter-priority" onclick="loadTasks()">
+            <select name="filter_priority" id="filter-priority" onchange="edit_filter()">
                 <option value="ANY">همه</option>
                 <option value="1">پایین</option>
                 <option value="2">متوسط</option>
                 <option value="3">بالا</option>
             </select>
             <br>
-            <input type="text" id="search-input" placeholder="جستجو" onclick="loadTasks()">
+            <input type="text" id="search-input" placeholder="جستجو" onkeyup="edit_filter()">
+            <br>
+            <button id="hider" onclick="hideSearch()">انصراف</button>
         </fieldset>
     </div>
-
-    <button id="new-task-btn" onclick="openTaskForm()">ساخت تسک جدید</button>
 
     <div id="task-form-container" style="display:none;">
         <fieldset>
             <legend>ساخت فعالیت</legend>
             <input type="hidden" id="task-id">
             <label for="task_title">عنوان</label>
-            <input type="text" name="task_title" id="task-title" placeholder="عنوان تسک">
+            <input type="text" name="task_title" id="task-title" placeholder="عنوان فعالیت">
             <br>
             <label for="task_description">توضیحات</label>
-            <textarea name="task_description" id="task-description" placeholder="توضیحات تسک"></textarea>
+            <textarea name="task_description" id="task-description" placeholder="توضیحات فعالیت"></textarea>
             <br>
             <div id="status-field-wrapper" style="display:none;">
                 <label for="task_status">وضعیت</label>
@@ -71,11 +78,7 @@
         </fieldset>
     </div>
 
-    <div id="task-list-container">
-        <fieldset>
-            <legend>فعالیت ها</legend>
-        </fieldset>
-    </div>
+    <div id="task-list-container"></div>
 
     <div id="pagination-container">
         <button id="prev-page-btn">صفحه قبل</button>
@@ -83,11 +86,10 @@
         <button id="next-page-btn">صفحه بعد</button>
     </div>
 
-    <div id="activity_log-container"></div>
-
     <script src="js/api.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/ui.js"></script>
     <script src="js/tasks.js"></script>
+    <script>requireLogin();</script>
 </body>
 </html>

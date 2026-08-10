@@ -1,0 +1,452 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+
+    padding: 30px 20px;
+
+    background: #f4f6f8;
+
+    font-family: Tahoma, Arial, sans-serif;
+    color: #2c3e50;
+}
+
+
+/* =========================
+   Container
+   ========================= */
+
+#task-detail-container {
+    width: 100%;
+    max-width: 800px;
+
+    margin: 0 auto;
+}
+
+
+/* =========================
+   Header
+   ========================= */
+
+.task-header {
+    margin-bottom: 15px;
+}
+
+#back-btn {
+    width: auto;
+
+    height: 42px;
+
+    padding: 0 18px;
+
+    border: none;
+    border-radius: 8px;
+
+    background: #2980b9;
+    color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#back-btn:hover {
+    background: #216a9b;
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   Task Detail
+   ========================= */
+
+#task-detail {
+    border: none;
+    border-radius: 14px;
+
+    margin: 0;
+
+    padding: 35px;
+
+    background: #2980b9;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+#task-detail legend {
+    padding: 0 15px;
+
+    color: #f1c40f;
+
+    font-size: 26px;
+    font-weight: bold;
+}
+
+
+/* =========================
+   Task Title
+   ========================= */
+
+#task-title {
+    margin: 5px 0 30px;
+
+    color: white;
+
+    font-size: 30px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   Task Info
+   ========================= */
+
+.task-info {
+    display: grid;
+
+    grid-template-columns: repeat(3, 1fr);
+
+    gap: 15px;
+
+    margin-bottom: 30px;
+}
+
+.info-item {
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: center;
+    justify-content: center;
+
+    min-height: 90px;
+
+    padding: 15px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.15);
+
+    color: white;
+
+    text-align: center;
+}
+
+.info-label {
+    margin-bottom: 10px;
+
+    color: #f1c40f;
+
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.info-item span:last-child {
+    font-size: 15px;
+}
+
+
+/* =========================
+   Description
+   ========================= */
+
+.description-section {
+    margin-top: 10px;
+    padding: 20px;
+
+    border-radius: 10px;
+
+    background: rgba(255, 255, 255, 0.12);
+}
+
+.description-section h3 {
+    margin-top: 0;
+    margin-bottom: 12px;
+
+    color: #f1c40f;
+
+    font-size: 17px;
+}
+
+#task-description {
+    margin: 0;
+
+    color: white;
+
+    line-height: 1.9;
+
+    white-space: pre-wrap;
+}
+
+
+/* =========================
+   Action Buttons
+   ========================= */
+
+.task-actions {
+    display: flex;
+
+    justify-content: center;
+
+    gap: 12px;
+
+    margin-top: 25px;
+}
+
+.task-actions button {
+    width: 120px;
+
+    height: 42px;
+
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#edit-task-btn {
+    background: #009639;
+}
+
+#edit-task-btn:hover {
+    background: #005c23;
+
+    transform: translateY(-1px);
+}
+
+#delete-task-btn {
+    background: #c0392b;
+}
+
+#delete-task-btn:hover {
+    background: #922b21;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   Error
+   ========================= */
+
+#task-error {
+    min-height: 20px;
+
+    margin: 15px 0 0;
+
+    color: #ffcccc;
+
+    font-size: 13px;
+
+    text-align: center;
+}
+
+
+/* =========================
+   Edit Form
+   ========================= */
+
+#edit-task-form {
+    width: 100%;
+    max-width: 800px;
+
+    margin: 20px auto 0;
+
+    padding: 30px;
+
+    border-radius: 14px;
+
+    background: #2980b9;
+
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+}
+
+#edit-task-form label {
+    display: block;
+
+    margin: 12px 0 6px;
+
+    color: white;
+
+    font-size: 14px;
+}
+
+#edit-task-form input,
+#edit-task-form select,
+#edit-task-form textarea {
+    width: 100%;
+
+    padding: 11px 13px;
+
+    border: 1px solid #dce1e6;
+    border-radius: 8px;
+
+    outline: none;
+
+    background: white;
+
+    color: #2c3e50;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    transition: 0.2s;
+}
+
+#edit-task-form input,
+#edit-task-form select {
+    height: 44px;
+}
+
+#edit-task-form textarea {
+    min-height: 110px;
+
+    resize: vertical;
+}
+
+#edit-task-form input:focus,
+#edit-task-form select:focus,
+#edit-task-form textarea:focus {
+    border-color: #3498db;
+
+    box-shadow:
+        0 0 0 3px rgba(52, 152, 219, 0.12);
+}
+
+
+/* =========================
+   Edit Buttons
+   ========================= */
+
+#save-edit-btn,
+#cancel-edit-btn {
+    width: 130px;
+
+    height: 42px;
+
+    margin-top: 20px;
+
+    border: none;
+    border-radius: 8px;
+
+    color: white;
+
+    font-family: inherit;
+    font-size: 14px;
+
+    cursor: pointer;
+
+    transition: 0.2s;
+}
+
+#save-edit-btn {
+    background: #009639;
+}
+
+#save-edit-btn:hover {
+    background: #005c23;
+
+    transform: translateY(-1px);
+}
+
+#cancel-edit-btn {
+    background: #c0392b;
+
+    margin-right: 8px;
+}
+
+#cancel-edit-btn:hover {
+    background: #922b21;
+
+    transform: translateY(-1px);
+}
+
+
+/* =========================
+   Edit Error
+   ========================= */
+
+#edit-error {
+    min-height: 20px;
+
+    margin: 12px 0 0;
+
+    color: #ffcccc;
+
+    font-size: 13px;
+}
+
+
+/* =========================
+   Mobile
+   ========================= */
+
+@media (max-width: 700px) {
+
+    body {
+        padding: 20px 12px;
+    }
+
+    #task-detail {
+        padding: 25px 18px;
+    }
+
+    #task-detail legend {
+        font-size: 22px;
+    }
+
+    #task-title {
+        font-size: 24px;
+    }
+
+    .task-info {
+        grid-template-columns: 1fr;
+
+        gap: 10px;
+    }
+
+    .info-item {
+        min-height: 70px;
+    }
+
+    .task-actions {
+        flex-direction: column;
+    }
+
+    .task-actions button {
+        width: 100%;
+    }
+
+    #edit-task-form {
+        padding: 25px 18px;
+    }
+
+    #save-edit-btn,
+    #cancel-edit-btn {
+        width: 100%;
+
+        margin-right: 0;
+    }
+
+    #cancel-edit-btn {
+        margin-top: 10px;
+    }
+
+    #back-btn {
+        width: 100%;
+    }
+}

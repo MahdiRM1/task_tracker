@@ -111,4 +111,4 @@ class ActivityLogViewSet(generics.ListAPIView):
     permission_classes = [permissions.IsAuthenticated]
 
     def get_queryset(self):
-        return ActivityLog.objects.filter(user_id=self.request.user.id).order_by('-created_at')[:10]
+        return ActivityLog.objects.filter(user_id=self.request.user.id).order_by('-created_at')
