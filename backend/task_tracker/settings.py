@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-&m!u7kpr54x_avsgejwj_yeon(8jcvvh&!0@&#1c$nl+984h#j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -82,11 +82,11 @@ WSGI_APPLICATION = 'task_tracker.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'task_tracker',
-        'USER': 'postgres',
-        'PASSWORD': '0123',
-        'HOST': 'localhost',
-        'PORT': '5432',
+        'NAME': os.environ.get("POSTGRES_DB", "task_tracker"),
+        'USER': os.environ.get("POSTGRES_USER", "postgres"),
+        'PASSWORD': os.environ.get("POSTGRES_PASSWORD", "0123"),
+        'HOST': os.environ.get("DB_HOST", "db"),
+        'PORT': os.environ.get("DB_PORT", "5432"),
     }
 }
 

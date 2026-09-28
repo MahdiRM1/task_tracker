@@ -1,0 +1,57 @@
+services:
+  db: 
+    image: postgres:16-alpine
+    container_name: task_tracker_db
+    restart: unless-stopped
+    volumes:
+      - db_data:/var/lib/postgresql/data
+    networks:
+      - db_network
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:-task_tracker}
+      POSTGRES_USER: ${POSTGRES_USER:-postgres}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-0123}
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-postgres} -d ${POSTGRES_DB:-task_tracker}"]
+      interval: 5s
+      timeout: 3s
+      retries: 5
+
+  api:
+    build: 
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: api_task_tracker
+    restart: unless-stopped
+    working_dir: /app/backend
+    depends_on:
+      db:
+        condition: service_healthy
+    ports:
+      - ${BACKEND_PORT:-8000}:8000
+    env_file: ./backend/.env
+    networks:
+      - db_network
+      - front_network
+
+  front:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    container_name: front_task_tracker
+    working_dir: /app/frontend
+    depends_on:
+      api:
+        condition: service_started
+    ports:
+      - ${FRONTEND_PORT:-3000}:80 
+    networks:
+      - front_network
+
+networks:
+  db_network:
+  front_network:
+
+
+volumes:
+  db_data:
